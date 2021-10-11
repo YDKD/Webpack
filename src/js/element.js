@@ -18,7 +18,6 @@ imgEle.src = img;
 const iEle = document.createElement('i')
 iEle.className = "iconfont icon-ashbin"
 
-console.log(content.length)
 
 document.body.appendChild(divEle)
 document.body.appendChild(bgDivEle)
