@@ -3,6 +3,15 @@ const { countPrice } = require('./js/format')
 
 import './js/element'
 
+import { createApp } from 'vue/dist/vue.esm-bundler'
+
+import App from './vue/App.vue'
+
+const app = createApp(App)
+app.mount("#app")
+
+
+
 console.log(math(3, 2))
 console.log(countPrice())
 

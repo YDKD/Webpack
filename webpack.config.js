@@ -7,10 +7,12 @@ const { DefinePlugin } = require('webpack'); // 定义上下文变量，webpack�
 
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
+const { VueLoaderPlugin } = require('vue-loader/dist/index')
+
 module.exports = {
   mode: 'development', // 设置 模式， development / production
   devtool: 'source-map',// 设置 source-map， 会打包生成映射模式，方便调试代码和查看错误 
-  entry: './src/index.js',
+  entry: './src/main.js',
   output: {
     filename: 'js/bundle.js',
     path: path.resolve(__dirname, './dist'),
@@ -51,6 +53,10 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader'
+      },
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader'
       }
 
 
@@ -102,6 +108,7 @@ module.exports = {
           }
         }
       ]
-    })
+    }),
+    new VueLoaderPlugin()
   ]
 };
