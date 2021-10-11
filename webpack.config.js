@@ -8,6 +8,8 @@ const { DefinePlugin } = require('webpack'); // 定义上下文变量，webpack�
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
+  mode: 'development', // 设置 模式， development / production
+  devtool: 'source-map',// 设置 source-map， 会打包生成映射模式，方便调试代码和查看错误 
   entry: './src/index.js',
   output: {
     filename: 'js/bundle.js',
@@ -35,7 +37,7 @@ module.exports = {
         },
         parser: {
           dataUrlCondition: {
-            maxSize: 2 * 1024 // 小于2kb的才会进行base64转换 这里的 maxSize 和 limit是一个道理
+            maxSize: 10 * 1024 // 小于 10kb 的才会进行base64转换 这里的 maxSize 和 limit是一个道理
           }
         },
       },
