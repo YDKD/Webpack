@@ -1,6 +1,11 @@
 const path = require('path');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+
+const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // 每次打包之后删除之前的 dist
+const HtmlWebpackPlugin = require('html-webpack-plugin'); 
+
+const { DefinePlugin } = require('webpack'); // 定义上下文变量，webpack内置的
+
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -70,7 +75,27 @@ module.exports = {
     ]
   },
   plugins: [
+    // 注：插件的执行与内置的 Hook有关系，所有这个地方插件的顺序可以随便写
     new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin()
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+      title: 'Webpack Study'
+    }),
+    new DefinePlugin({
+      BASE_URL: "'./'"
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: 'public',
+          to: './',
+          globOptions: {
+            ignore: [
+              "**/index.html", // 当前文件夹下所有的index.html
+            ]
+          }
+        }
+      ]
+    })
   ]
 };
