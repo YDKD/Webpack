@@ -23,3 +23,5 @@ document.body.appendChild(divEle)
 document.body.appendChild(bgDivEle)
 document.body.appendChild(imgEle)
 document.body.appendChild(iEle)
+
+console.log(1233)

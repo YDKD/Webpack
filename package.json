@@ -1,10 +1,11 @@
 {
-  "name": "Vue3Test",
+  "name": "vue3-test",
   "version": "1.0.0",
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "dev": "webpack serve"
   },
   "keywords": [],
   "author": "",
@@ -28,7 +29,8 @@
     "url-loader": "^4.1.1",
     "vue-loader": "^16.8.1",
     "webpack": "^5.58.0",
-    "webpack-cli": "^4.9.0"
+    "webpack-cli": "^4.9.0",
+    "webpack-dev-server": "^4.3.1"
   },
   "dependencies": {
     "vue": "^3.2.20"

@@ -1,5 +1,6 @@
 <template>
     <h2>我是Webpack渲染出来的vue</h2>
+    <h2>{{title}}</h2>
     <hello-world></hello-world>
 </template>
 
@@ -11,7 +12,7 @@ export default {
     },
     data() {
         return {
-            title: 'Hello World'
+            title: 'Hello Word'
         }
     },
     methods: {
