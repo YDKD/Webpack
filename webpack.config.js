@@ -31,8 +31,16 @@ module.exports = {
     static: ['public'],
     compress: true, // 采用 gzip
     host: '0.0.0.0',
-    port: 6666
+    port: 10001
     // contentBase: './public', // 表示没有从Webpack中读取的话，会从这个资源进行加载
+  },
+  proxy: {
+    "/api": {
+      target: "http://www.baidu.com",
+      pathRewrite: { '^/api': '/api' },
+      secure: false, // 默认是 true，如果是请求一个有 https证书的地址，如果希望在没有证书的时候也可以进行请求，则改为false
+      changeOrigin: true, // 意思是在请求的时候，是否需要将请求信息 例如从 http://localhost:10001 -> http://www.baidu.com。
+    }
   },
   module: {
     // loader 是在模块加载的时候需要用loader进行转化处理的

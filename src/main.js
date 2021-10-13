@@ -3,6 +3,8 @@ const { countPrice } = require('./js/format')
 
 import './js/element'
 
+import axios from 'axios'
+
 // 由于模块热更新是默认为全局文件都会进行修改，所以会刷新浏览器
 // 会造成性能消耗，可以采取以下办法指定模块
 if(module.hot) {
