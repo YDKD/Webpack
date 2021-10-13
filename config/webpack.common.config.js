@@ -1,11 +1,10 @@
 const path = require('path');
 
-const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // 每次打包之后删除之前的 dist
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const HtmlWebpackPlugin = require('html-webpack-plugin'); 
 
 const { DefinePlugin } = require('webpack'); // 定义上下文变量，webpack内置的
 
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const { VueLoaderPlugin } = require('vue-loader/dist/index')
 
@@ -16,39 +15,17 @@ const { VueLoaderPlugin } = require('vue-loader/dist/index')
 
 module.exports = {
   target: 'web', // 为 某个环境进行打包 和 devServer hot同时使用
-  mode: 'development', // 设置 模式， development / production
-  devtool: 'source-map',// 设置 source-map， 会打包生成映射模式，方便调试代码和查看错误 
-  entry: './src/main.js',
+  entry: './src/main.js', // 此处不用写 ../ 是因为 webpack里面有一个默认的属性context 会自动从根路径开始查找
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, './src'), // 别名
+      "@": path.resolve(__dirname, '../src'), // 别名
     },
     extensions: ['.vue', '...'], // 这个就是文件模块查找时的后缀，如果在其中有的话，则不需要写对应的后缀名，默认里面有 '.js', '.json', '.wasm'
   },
   output: {
     filename: 'js/bundle.js',
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(__dirname, '../dist'),
   },
-  devServer: {
-    hot: true, // Hot Module Replace,但是其实也是建立了一个 websocket的长连接
-    client: {
-      progress: true, // 显示静态资源打包进度
-    },
-    static: ['public'],
-    compress: true, // 采用 gzip
-    host: '0.0.0.0',
-    port: 10001,
-    proxy: {
-      "/api": {
-        target: "http://www.baidu.com",
-        pathRewrite: { '^/api': '/api' },
-        secure: false, // 默认是 true，如果是请求一个有 https证书的地址，如果希望在没有证书的时候也可以进行请求，则改为false
-        // changeOrigin: true, // 意思是在请求的时候，是否需要将请求信息 例如从 http://localhost:10001 -> http://www.baidu.com。
-      }
-    },
-    // contentBase: './public', // 表示没有从Webpack中读取的话，会从这个资源进行加载
-  },
-
   module: {
     // loader 是在模块加载的时候需要用loader进行转化处理的
     rules: [
@@ -119,8 +96,6 @@ module.exports = {
     ]
   },
   plugins: [
-    // 注：插件的执行与内置的 Hook有关系，所有这个地方插件的顺序可以随便写
-    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './public/index.html',
       title: 'Webpack Study'
@@ -130,19 +105,7 @@ module.exports = {
       __VUE_OPTIONS_API__: true,
       __VUE_PROD_DEVTOOLS__: false
     }),
-    // new CopyWebpackPlugin({
-    //   patterns: [
-    //     {
-    //       from: 'public',
-    //       to: './',
-    //       globOptions: {
-    //         ignore: [
-    //           "**/index.html", // 当前文件夹下所有的index.html
-    //         ]
-    //       }
-    //     }
-    //   ]
-    // }),
+    
     new VueLoaderPlugin()
   ],
 };
