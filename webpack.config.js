@@ -19,6 +19,12 @@ module.exports = {
   mode: 'development', // 设置 模式， development / production
   devtool: 'source-map',// 设置 source-map， 会打包生成映射模式，方便调试代码和查看错误 
   entry: './src/main.js',
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, './src'), // 别名
+    },
+    extensions: ['.vue', '...'], // 这个就是文件模块查找时的后缀，如果在其中有的话，则不需要写对应的后缀名，默认里面有 '.js', '.json', '.wasm'
+  },
   output: {
     filename: 'js/bundle.js',
     path: path.resolve(__dirname, './dist'),
@@ -39,7 +45,7 @@ module.exports = {
       target: "http://www.baidu.com",
       pathRewrite: { '^/api': '/api' },
       secure: false, // 默认是 true，如果是请求一个有 https证书的地址，如果希望在没有证书的时候也可以进行请求，则改为false
-      changeOrigin: true, // 意思是在请求的时候，是否需要将请求信息 例如从 http://localhost:10001 -> http://www.baidu.com。
+      // changeOrigin: true, // 意思是在请求的时候，是否需要将请求信息 例如从 http://localhost:10001 -> http://www.baidu.com。
     }
   },
   module: {
