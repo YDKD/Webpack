@@ -20,5 +20,5 @@ this.service.commands[name] = { fn, opts: opts || {}} <==> this.service.commands
 
 补充：
 1、chainwebpack 和 configureWebpack是否能够一起配置？
-答：能。在源码中两个是不存在 else 关系。
+答：能。在源码中两个是不存在 else 关系
 
