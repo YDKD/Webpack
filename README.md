@@ -18,3 +18,7 @@ this.service.commands[name] = { fn, opts: opts || {}} <==> this.service.commands
 
 总结：vue-cli-serve serve-> node_modules/cli-Service/Service.js中 run 方法，run -> 根据执行脚本的名称，例如serve，在commands文件夹中对每一项进行遍历，找到对应的 serve，通过api.registerCommand函数的第三个参数执行。第三个方法，其实就是通过 require引入webpack和webpack-dev-server，其实也是调用了这两个模块中的方法，进行执行。当然，这其中也涉及到了许多的配置项，采用的或运算， userOptions || projectOptions(这个项目的配置其实是通过了对用户配置进行了扩展运算符，是cli-serve/options.js)。然后通过对配置项经过 webpack方法进行compiler之后，放入实力化的WebpackServer中进行处理，最后返回的server进行 listen
 
+补充：
+1、chainwebpack 和 configureWebpack是否能够一起配置？
+答：能。在源码中两个是不存在 else 关系。
+
